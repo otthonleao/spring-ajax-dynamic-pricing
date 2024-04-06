@@ -5,7 +5,7 @@ import java.io.Serializable;
 @SuppressWarnings("Serial")
 public class SocialMetaTag implements Serializable {
     private String site;
-    private String tirle;
+    private String title;
     private String url;
     private String image;
 
@@ -17,12 +17,12 @@ public class SocialMetaTag implements Serializable {
         this.site = site;
     }
 
-    public String getTirle() {
-        return tirle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTirle(String tirle) {
-        this.tirle = tirle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUrl() {
@@ -39,5 +39,15 @@ public class SocialMetaTag implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "SocialMetaTag{" +
+                "site='" + site + '\'' +
+                ", tirle='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }
