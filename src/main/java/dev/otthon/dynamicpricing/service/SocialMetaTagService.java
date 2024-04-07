@@ -58,11 +58,6 @@ public class SocialMetaTagService {
 
     // Verifica se se alguma das tags do metadados do site está vazia
     private boolean isEmpty(SocialMetaTag tag) {
-//        if (tag.getTitle() == null || tag.getUrl() == null || tag.getImage() == null || tag.getSite() == null) {
-//            return true;
-//        } else {
-//            return false;
-//        }
         if (tag.getImage().isEmpty()) return true;
         if (tag.getSite().isEmpty()) return true;
         if (tag.getTitle().isEmpty()) return true;
