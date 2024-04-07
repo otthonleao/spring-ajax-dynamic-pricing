@@ -41,6 +41,10 @@ public class Promocao implements Serializable {
     @Column(name = "data_cadastro", nullable = false)
     private LocalDateTime dtCadastro;
 
+    @ManyToOne()
+    @JoinColumn(name = "categoria_fk")
+    private Categoria categoria;
+
     public Long getId() {
         return id;
     }
@@ -113,17 +117,25 @@ public class Promocao implements Serializable {
         this.dtCadastro = dtCadastro;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Promocao promocao = (Promocao) o;
-        return likes == promocao.likes && Objects.equals(id, promocao.id) && Objects.equals(titulo, promocao.titulo) && Objects.equals(link_promocao, promocao.link_promocao) && Objects.equals(site_promocao, promocao.site_promocao) && Objects.equals(descricao, promocao.descricao) && Objects.equals(link_imagem, promocao.link_imagem) && Objects.equals(preco, promocao.preco) && Objects.equals(dtCadastro, promocao.dtCadastro);
+        return likes == promocao.likes && Objects.equals(id, promocao.id) && Objects.equals(titulo, promocao.titulo) && Objects.equals(link_promocao, promocao.link_promocao) && Objects.equals(site_promocao, promocao.site_promocao) && Objects.equals(descricao, promocao.descricao) && Objects.equals(link_imagem, promocao.link_imagem) && Objects.equals(preco, promocao.preco) && Objects.equals(dtCadastro, promocao.dtCadastro) && Objects.equals(categoria, promocao.categoria);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, titulo, link_promocao, site_promocao, descricao, link_imagem, preco, likes, dtCadastro);
+        return Objects.hash(id, titulo, link_promocao, site_promocao, descricao, link_imagem, preco, likes, dtCadastro, categoria);
     }
 
     @Override
@@ -138,6 +150,7 @@ public class Promocao implements Serializable {
                 ", preco=" + preco +
                 ", likes=" + likes +
                 ", dtCadastro=" + dtCadastro +
+                ", categoria=" + categoria +
                 '}';
     }
 }
