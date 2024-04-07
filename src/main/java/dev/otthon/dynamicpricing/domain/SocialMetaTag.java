@@ -2,7 +2,7 @@ package dev.otthon.dynamicpricing.domain;
 
 import java.io.Serializable;
 
-@SuppressWarnings("Serial")
+@SuppressWarnings("serial")
 public class SocialMetaTag implements Serializable {
     private String site;
     private String title;
@@ -45,7 +45,7 @@ public class SocialMetaTag implements Serializable {
     public String toString() {
         return "SocialMetaTag{" +
                 "site='" + site + '\'' +
-                ", tirle='" + title + '\'' +
+                ", title='" + title + '\'' +
                 ", url='" + url + '\'' +
                 ", image='" + image + '\'' +
                 '}';
