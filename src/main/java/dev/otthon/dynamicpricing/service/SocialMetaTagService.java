@@ -25,6 +25,11 @@ public class SocialMetaTagService {
         if (!isEmpty(openGraph)) {
             return openGraph;
         }
+
+        SocialMetaTag bemol = getOpenGraphByUrl(url);
+        if (!isEmpty(bemol)) {
+            return bemol;
+        }
         return null;
     }
 
@@ -50,6 +55,20 @@ public class SocialMetaTagService {
             tag.setUrl(doc.head().select("meta[property=og:url]").attr("content"));
             tag.setImage(doc.head().select("meta[property=og:image]").attr("content"));
             tag.setSite(doc.head().select("meta[property=og:site_name]").attr("content"));
+        } catch (IOException e) {
+            Log.error(e.getMessage(), e.getCause());
+        }
+        return tag;
+    }
+
+    private SocialMetaTag getBemolMetaByUrl(String url) {
+        SocialMetaTag tag = new SocialMetaTag();
+        try {
+            Document doc = Jsoup.connect(url).header("Access-Control-Allow-Origin", "https://collector-pxzhh9f9x0.perimeterx.net/api/v1/collector").get();
+            tag.setTitle(doc.head().select("meta[property=og:title]").attr("content"));
+            tag.setUrl(doc.head().select("meta[property=og:url]").attr("content"));
+            tag.setImage(doc.head().select("meta[property=og:type]").attr("content"));
+            tag.setSite(doc.head().select("meta[property=og:description]").attr("content"));
         } catch (IOException e) {
             Log.error(e.getMessage(), e.getCause());
         }
