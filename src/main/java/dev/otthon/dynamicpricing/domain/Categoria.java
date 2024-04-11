@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "Categoria")
+@Table(name = "categoria")
 public class Categoria implements Serializable {
 
     @Id
