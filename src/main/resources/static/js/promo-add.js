@@ -18,6 +18,14 @@ $("#form-add-promo").submit(function(evt) {
         url: "/promocao/save",
         data: promo,
         beforeSend: function () {
+            // Remover as mensagens de erro
+            $("#span").closest('.error-span').remove();
+            // Remover as bordas vermelhas dos inputs
+            $("#categoria").removeClass("is-invalid");
+            $("#preco").removeClass("is-invalid");
+            $("#linkPromocao").removeClass("is-invalid");
+            $("#titulo").removeClass("is-invalid");
+            // Habilita o loading na página
             $("#form-add-promo").hide();
             $("#loader-form").addClass("loader").show();
         },
@@ -27,7 +35,10 @@ $("#form-add-promo").submit(function(evt) {
             });
             $("#linkImagem").attr("scr", "/images/promo-dark.png");
             $("#site").text("");
-            $("#alert").addClass("alert alert-success").text("OK! Promoção cadastrada com sucesso!");
+            $("#alert")
+                .removeClass("alert alert-danger")
+                .addClass("alert alert-success")
+                .text("OK! Promoção cadastrada com sucesso!");
         },
         error: function (xhr) {
             console.log("> ERROR: " + xhr.responseText);
