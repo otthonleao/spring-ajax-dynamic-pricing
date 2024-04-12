@@ -1,6 +1,8 @@
 package dev.otthon.dynamicpricing.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
@@ -16,21 +18,24 @@ public class Promocao implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Um título é requerido")
     @Column(name="titulo", nullable = false)
     private String titulo;
 
+    @NotBlank(message = "O link da promoção é requerido")
     @Column(name="link_promocao", nullable = false)
-    private String link_promocao;
+    private String linkPromocao;
 
     @Column(name="site_promocao", nullable = false)
-    private String site_promocao;
+    private String site;
 
-    @Column(name="descricao", nullable = false)
+    @Column(name="descricao")
     private String descricao;
 
     @Column(name="link_imagem", nullable = false)
-    private String link_imagem;
+    private String linkImagem;
 
+    @NotNull(message = "O preço é requerido")
     @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
     @Column(name = "preco_promocao", nullable = false)
     private BigDecimal preco;
@@ -41,6 +46,7 @@ public class Promocao implements Serializable {
     @Column(name = "data_cadastro", nullable = false)
     private LocalDateTime dtCadastro;
 
+    @NotNull(message = "Categoria é requerida")
     @ManyToOne()
     @JoinColumn(name = "categoria_fk")
     private Categoria categoria;
@@ -61,20 +67,20 @@ public class Promocao implements Serializable {
         this.titulo = titulo;
     }
 
-    public String getLink_promocao() {
-        return link_promocao;
+    public String getLinkPromocao() {
+        return linkPromocao;
     }
 
-    public void setLink_promocao(String link_promocao) {
-        this.link_promocao = link_promocao;
+    public void setLinkPromocao(String linkPromocao) {
+        this.linkPromocao = linkPromocao;
     }
 
-    public String getSite_promocao() {
-        return site_promocao;
+    public String getSite() {
+        return site;
     }
 
-    public void setSite_promocao(String site_promocao) {
-        this.site_promocao = site_promocao;
+    public void setSite(String site) {
+        this.site = site;
     }
 
     public String getDescricao() {
@@ -85,12 +91,12 @@ public class Promocao implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getLink_imagem() {
-        return link_imagem;
+    public String getLinkImagem() {
+        return linkImagem;
     }
 
-    public void setLink_imagem(String link_imagem) {
-        this.link_imagem = link_imagem;
+    public void setLinkImagem(String linkImagem) {
+        this.linkImagem = linkImagem;
     }
 
     public BigDecimal getPreco() {
@@ -130,12 +136,12 @@ public class Promocao implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Promocao promocao = (Promocao) o;
-        return likes == promocao.likes && Objects.equals(id, promocao.id) && Objects.equals(titulo, promocao.titulo) && Objects.equals(link_promocao, promocao.link_promocao) && Objects.equals(site_promocao, promocao.site_promocao) && Objects.equals(descricao, promocao.descricao) && Objects.equals(link_imagem, promocao.link_imagem) && Objects.equals(preco, promocao.preco) && Objects.equals(dtCadastro, promocao.dtCadastro) && Objects.equals(categoria, promocao.categoria);
+        return likes == promocao.likes && Objects.equals(id, promocao.id) && Objects.equals(titulo, promocao.titulo) && Objects.equals(linkPromocao, promocao.linkPromocao) && Objects.equals(site, promocao.site) && Objects.equals(descricao, promocao.descricao) && Objects.equals(linkImagem, promocao.linkImagem) && Objects.equals(preco, promocao.preco) && Objects.equals(dtCadastro, promocao.dtCadastro) && Objects.equals(categoria, promocao.categoria);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, titulo, link_promocao, site_promocao, descricao, link_imagem, preco, likes, dtCadastro, categoria);
+        return Objects.hash(id, titulo, linkPromocao, site, descricao, linkImagem, preco, likes, dtCadastro, categoria);
     }
 
     @Override
@@ -143,10 +149,10 @@ public class Promocao implements Serializable {
         return "Promocao{" +
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
-                ", link_promocao='" + link_promocao + '\'' +
-                ", site_promocao='" + site_promocao + '\'' +
+                ", link_promocao='" + linkPromocao + '\'' +
+                ", site_promocao='" + site + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", link_imagem='" + link_imagem + '\'' +
+                ", link_imagem='" + linkImagem + '\'' +
                 ", preco=" + preco +
                 ", likes=" + likes +
                 ", dtCadastro=" + dtCadastro +
